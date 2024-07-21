@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movieflix.movies.dto.MovieDto;
+import com.movieflix.movies.exceptions.EmptyFileException;
 import com.movieflix.movies.service.MovieService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,10 @@ public class MovieController {
     }
 
     @PostMapping("/add-movie")
-    public ResponseEntity<MovieDto> postMethodName(@RequestPart MultipartFile file, @RequestPart String movieDto) throws IOException {
+    public ResponseEntity<MovieDto> postMethodName(@RequestPart MultipartFile file, @RequestPart String movieDto) throws IOException, EmptyFileException {
+        if (file.isEmpty()) {
+            throw new EmptyFileException("File is empty! Please send another file!");
+        }
         MovieDto movie = convertToMovieDto(movieDto);
         return new ResponseEntity<>(movieService.addMovie(movie, file), HttpStatus.CREATED);
     }
