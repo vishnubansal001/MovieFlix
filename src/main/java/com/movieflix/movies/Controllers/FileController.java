@@ -1,4 +1,4 @@
-package com.movieflix.movies.Controllers;
+package com.movieflix.movies.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;

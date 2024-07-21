@@ -24,7 +24,7 @@ public class MovieDto {
 
     private Set<String> movieCast;
 
-    private Integer releaseYear;
+    private Integer relase;
 
     @NotBlank(message = "poster is required")
     private String poster;
